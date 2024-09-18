@@ -124,14 +124,10 @@ function ScreenController() {
       // Display player's turn
       playerTurnDiv.textContent = `${activePlayer.name}'s turn...`
   
-      // Render board squares
       board.forEach((row, rowNum) => {
         row.forEach((cell, colNum) => {
-          // Anything clickable should be a button!!
           const cellButton = document.createElement("button");
           cellButton.classList.add("cell");
-          // Create a data attribute to identify the column
-          // This makes it easier to pass into our `playRound` function 
           cellButton.dataset.column = colNum;
           cellButton.dataset.row = rowNum;
           cellButton.textContent = cell.getPlayer();
@@ -144,7 +140,6 @@ function ScreenController() {
     function clickHandlerBoard(e) {
       const selectedColumn = e.target.dataset.column;
       const selectedRow = e.target.dataset.row;
-      // Make sure I've clicked a column and not the gaps in between
       if (!selectedColumn) return;
       
       game.playRound(selectedRow, selectedColumn);
@@ -154,10 +149,8 @@ function ScreenController() {
     }
     boardDiv.addEventListener("click", clickHandlerBoard);
   
-    // Initial render
     updateScreen();
   
-    // We don't need to return anything from this module because everything is encapsulated inside this screen controller.
   }
 
 const game = ScreenController();
